@@ -65,7 +65,7 @@ pr_go:
         lb   t1, 0(t0)             # caractere da linha
         lb   t2, 1(t0)             # caractere da coluna
         addi t1, t1, -65           # linha
-        addi t2, t2, -48           # coluna
+        addi t2, t2, -49           # coluna
 
         # ---- valida a faixa (0..2) ----
         bltz t1, invalid
@@ -76,6 +76,7 @@ pr_go:
 
         # ---- calcula o indice da celula no tabuleiro ----
         slli t3, t1, 1
+        add  t3, t3, t1
         add  t3, t3, t2
 
         # ---- a celula ja esta ocupada? ----
@@ -99,6 +100,7 @@ pr_go:
         # ---- passa a vez para o outro jogador ----
         li   t6, 3
         sub  t6, t6, s0
+        mv   s0, t6
         j    loop
 
 invalid:
@@ -163,10 +165,10 @@ pb_col:
         beqz t6, pb_empty
         li   t2, 1
         beq  t6, t2, pb_um         # celula == 1 ?
-        li   a0, 88                # simbolo para celula == 2
+        li   a0, 79                # simbolo para celula == 2
         j    pb_putc
 pb_um:
-        li   a0, 79                # simbolo para celula == 1
+        li   a0, 88                # simbolo para celula == 1
         j    pb_putc
 pb_empty:
         li   a0, 46                # '.'
@@ -194,7 +196,7 @@ pb_done:
 check_win:
         la   t0, wins              # ponteiro para a tabela
         li   t1, 0                 # contador de linhas
-        li   t2, 7                 # quantas linhas verificar
+        li   t2, 8                 # quantas linhas verificar
 cw_loop:
         bge  t1, t2, cw_no
         lb   t3, 0(t0)             # i0
