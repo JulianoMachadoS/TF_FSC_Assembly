@@ -12,9 +12,8 @@ mv s0, t6
 
 Que atualiza o registrador que indica quem é o jogador da vez.
 
-Erro 2 – Conversão da coluna
-
-O programa convertia o valor da coluna usando o código ASCII do caractere  0. Isso fazia com que a entrada fosse interpretada de forma errada. Como a entrada válida é de 1 a 3, a conversão deveria ser feita a partir do caractere 1.
+Erro 2 – Conversão da coluna:  
+O programa estava convertendo o número da coluna a partir do caractere 0, em vez do caractere 1. Por isso, a coluna digitada era interpretada com um número errado. Como as colunas válidas vão de 1 a 3, a conversão precisava ser feita a partir do 1.
 
 Alterei a instrução:  
 addi t2, t2, -48
@@ -39,14 +38,8 @@ Os caracteres mostrados no tabuleiro estavam invertidos. O valor correspondente 
 Erro 5 – Verificação de vitória:  
 O programa checava apenas sete combinações vencedoras, ignorando uma possibilidade. Isso fazia com que algumas vitórias não fossem reconhecidas.
 
-Alterei o valor do contador de verificações de:  
-li t2, 7
+Alterei o valor do contador de verificações de 7 para 8  
+Isso permitiu que todas as oito combinações de vitória fossem verificadas.
 
-para:  
-li t2, 8
-
-isso permitiu que todas as oito combinações de vitória fossem verificadas.
-
-
-Conclusão:
+Conclusão:   
 Após corrigir os cinco erros, o jogo passou a funcionar corretamente. As jogadas são exibidas no tabuleiro, os jogadores alternam suas jogadas e o programa identifica corretamente as situações de vitória.
